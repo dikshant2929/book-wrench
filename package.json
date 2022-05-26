@@ -12,7 +12,7 @@
     "start:preprod": "NODE_ENV=preprod node src/server.js",
     "start:uat": "NODE_ENV=uat node src/server.js",
     "start:qa": "NODE_ENV=qa node src/server.js",
-    "start:dev": "npm run build && NODE_ENV=development node dist/server.js",
+    "start:dev": "NODE_ENV=development node src/server.js",
     "build": "rm -rf dist && babel src -d --out-dir dist --copy-files",
     "start:local": "NODE_ENV=local node src/server.js",
     "dev": "NODE_ENV=local nodemon src/server.js",
