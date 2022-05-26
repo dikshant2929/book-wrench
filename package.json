@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A node & mongo based service to control DB related operations & access",
   "main": "src/server.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "start:prod": "NODE_ENV=production node src/server.js",
     "start": "NODE_ENV=production node src/server.js",
