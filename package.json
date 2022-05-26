@@ -19,8 +19,7 @@
     "test": "node --version && NODE_ENV=test jest --detectOpenHandles --coverageReporters text-summary --collectCoverage --passWithNoTests --verbose",
     "format": "find . -path ./node_modules -prune -o -name '*.js' -print0 | xargs -0 prettier --print-width 140 --write --ignore-path .gitignore",
     "lint": "eslint . --ext .js --ignore-path .gitignore",
-    "pre-commit": "npm run format && npm run lint",
-    "prepare": "husky install"
+    "pre-commit": "npm run format && npm run lint"
   },
   "keywords": [
     "User service"
@@ -42,7 +41,6 @@
   },
   "devDependencies": {
     "eslint": "^7.32.0",
-    "husky": "^7.0.1",
     "jest": "^27.0.6",
     "lint-staged": "^11.1.2",
     "mongodb-memory-server": "^7.3.6",
