@@ -16,6 +16,7 @@ class UserController {
     filter.isVerified === undefined && (filter.isVerified = true);
     const result = await User.getUserByFilter(filter);
     const response = result ? { message : "Thank You for logging-in at Book Wrench System.", data : result} : { message : "Please check your login credetails."};
+    result && User.updateUserById(result.id, { lastLogin : new Date()});
     res.status(result ? httpStatus.OK : httpStatus.NOT_ACCEPTABLE).json(response);
   }
 

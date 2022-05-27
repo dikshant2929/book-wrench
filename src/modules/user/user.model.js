@@ -100,6 +100,7 @@ userSchema.post("findOne", function (user, next) {
 // });
 
 // userSchema.pre("findOneAndUpdate", function (next) {
+  
 //   if (this?.getQuery()?.mobile) {
 //     this.getQuery().mobile = encrypt(this.getQuery().mobile);
 //   }
@@ -107,6 +108,7 @@ userSchema.post("findOne", function (user, next) {
 //   if (this?.getUpdate()?.$set?.email) {
 //     this.getUpdate().$set.email = encrypt(this.getUpdate().$set.email);
 //   }
+
 //   next();
 // });
 
@@ -121,10 +123,10 @@ userSchema.post("findOne", function (user, next) {
 //   next();
 // });
 
-// userSchema.post("findOneAndUpdate", function (result, next) {
-//   result = decryptObj(result, ["mobile", "email"]);
-//   next();
-// });
+userSchema.post("findOneAndUpdate", function (result, next) {
+  result.password = undefined;
+  next();
+});
 
 // userSchema.post("findOneAndDelete", function (result, next) {
 //   result = decryptObj(result, ["mobile", "email"]);

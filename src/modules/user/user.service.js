@@ -35,8 +35,8 @@ class UserService {
     const user = await this.getUserById(userId);
     if (!user) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.USER_NOT_FOUND);
 
-    const timestamp = Date.now();
-    updateBody.lastLogin = timestamp;
+    // const timestamp = Date.now();
+    // updateBody.lastLogin = timestamp;
     const result = await User.findOneAndUpdate({ _id: ObjectId(userId) }, { $set: updateBody }, { returnDocument: "after" });
     return result;
   }
@@ -46,9 +46,9 @@ class UserService {
     if (!Object.keys(updateBody).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.UPDATE_BODY_EMPTY);
     const user = await this.getUserByFilter(filter);
     if (!user) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.USER_NOT_FOUND);
-    const timestamp = Date.now();
-    updateBody.source = updateBody.source || "myaccount";
-    updateBody.lastLogin = timestamp;
+    // const timestamp = Date.now();
+    // updateBody.source = updateBody.source || "myaccount";
+    // updateBody.lastLogin = timestamp;
     const result = await User.findOneAndUpdate({ ...filter }, { $set: updateBody }, { returnDocument: "after" });
     return result;
   }
