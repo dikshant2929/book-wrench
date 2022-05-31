@@ -1,5 +1,6 @@
 const COLLECTIONS = {
-  USER: "User"
+  USER: "User",
+  CATEGORY : "Category"
 };
 
 module.exports = COLLECTIONS;

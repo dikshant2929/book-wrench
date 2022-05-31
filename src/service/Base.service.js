@@ -28,7 +28,7 @@ class Base {
   }
 
   async getAllByFilter(filter = {}, sortPref = { created: -1 }) {
-    if (!Object.keys(filter).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.FIND_FILTER_MISSING);
+    // if (!Object.keys(filter).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.FIND_FILTER_MISSING);
     return this.Model.find(filter).sort(sortPref);
   }
 

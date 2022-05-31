@@ -44,9 +44,24 @@ const loginValidation = {
   }),
 };
 
+
+const forgotPasswordValidation = {
+  body: Joi.object({
+    email: Joi.string().email(),
+  }),
+};
+
+const verifyForgotPasswordTokenValidation = {
+  params: Joi.object({
+    token: Joi.string()
+  }),
+};
+
 module.exports = {
   newUserValidation,
   updateUserValidation,
   getUserValidation,
-  loginValidation
+  loginValidation,
+  forgotPasswordValidation,
+  verifyForgotPasswordTokenValidation
 };

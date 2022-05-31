@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const User = require("./user.service");
 const catchAsync = require("../../utils/catchAsync");
+const JWT = require("../../utils/JWT");
 
 class UserController {
   constructor() {
@@ -8,6 +9,8 @@ class UserController {
     this.update = catchAsync(this.put.bind(this));
     this.create = catchAsync(this.post.bind(this));
     this.login = catchAsync(this.onLogin.bind(this));
+    this.forgotPassword = catchAsync(this.onForgotPassword.bind(this));
+    this.verifyPasswordToken = catchAsync(this.onVerifyPasswordToken.bind(this));
   }
 
   async onLogin(req, res){
@@ -18,6 +21,50 @@ class UserController {
     const response = result ? { message : "Thank You for logging-in at Book Wrench System.", data : result} : { message : "Please check your login credetails."};
     result && User.updateUserById(result.id, { lastLogin : new Date()});
     res.status(result ? httpStatus.OK : httpStatus.NOT_ACCEPTABLE).json(response);
+  }
+
+  async onVerifyPasswordToken(req, res){
+    const { token } = req.params;
+    const payload = JWT.verifyToken(token);  
+    const currentTime = (new Date().getTime() / 1000);
+    if(!payload.status || payload?.exp < currentTime){
+      const data = {
+        message : "Link has expired, Please retry with forgot password process."
+      };
+      const result = await User.getUserByFilter({forgotPasswordToken : token});
+      result && User.removeFieldFromCollection(result.id, { forgotPasswordToken : 1});
+      return res.status(httpStatus.NOT_ACCEPTABLE).json(data);
+    }
+  
+    const result = await User.getUserByFilter({forgotPasswordToken : token});
+    if(!result){
+      const data = {
+        message : "Link has expired, Please retry with forgot password process."
+      };
+      return res.status(httpStatus.NOT_ACCEPTABLE).json(data);
+    }
+
+    const data = {
+      message : "Token Verified"
+    }
+    res.status(httpStatus.OK).json(data);
+  }
+
+  async onForgotPassword(req, res){
+    const filter = req.body;
+    const result = await User.getUserByFilter(filter);
+    if(!result){
+      const data = {
+        message : "User doesn't exists, please check your email id."
+      };
+      return res.status(httpStatus.NOT_ACCEPTABLE).json(data);
+    }
+    const forgotPasswordToken = JWT.createToken({ userId: result.id}, "300s");
+    const data = {
+      message : "Forgot password link has been sent to your email address successfully"
+    }
+    data && User.updateUserById(result.id, { forgotPasswordToken });
+    res.status(httpStatus.OK).json(data);
   }
 
   async get(req, res) {

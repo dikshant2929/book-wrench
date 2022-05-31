@@ -29,6 +29,11 @@ class UserService {
     return await User.findOne(filter);
   }
 
+  async removeFieldFromCollection(userId, filter = {}) {
+    if (!Object.keys(filter).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.FIND_FILTER_MISSING);
+    return await User.update({ _id: ObjectId(userId) }, {$unset: filter});
+  }
+
   async updateUserById(userId, updateBody = {}) {
     if (!userId) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.ID_MISSING);
     if (!Object.keys(updateBody).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.UPDATE_BODY_EMPTY);
@@ -40,6 +45,7 @@ class UserService {
     const result = await User.findOneAndUpdate({ _id: ObjectId(userId) }, { $set: updateBody }, { returnDocument: "after" });
     return result;
   }
+
 
   async updateUserByFilter(filter = {}, updateBody = {}) {
     if (!Object.keys(filter).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.UPDATE_FILTER_MISSING);

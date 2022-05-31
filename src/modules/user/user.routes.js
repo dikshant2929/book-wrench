@@ -7,6 +7,9 @@ const validate = require("../../middlewares/validate");
 const schema = require("./user.validation");
 
 router.post('/login', validate(schema.loginValidation), UserController.login);
+router.post('/forgot-password', validate(schema.forgotPasswordValidation), UserController.forgotPassword);
+router.get('/verify-forgot-password-token/:token', validate(schema.verifyForgotPasswordTokenValidation), UserController.verifyPasswordToken);
+router.post('/login', validate(schema.loginValidation), UserController.login);
 
 router
   .route("/:userId?")

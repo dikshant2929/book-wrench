@@ -47,6 +47,9 @@ const userSchema = new mongoose.Schema(
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    forgotPasswordToken : {
+      type: String
     }
   },
   {
@@ -137,5 +140,8 @@ userSchema.plugin(toJSON);
 /**
  * @typedef User
  */
+
+userSchema.index({forgotPasswordToken: 1},{expireAfterSeconds: 300});
+
 const User = new mongoose.model(USER, userSchema);
 module.exports = User;
