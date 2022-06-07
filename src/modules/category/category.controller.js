@@ -12,7 +12,7 @@ class CategoryController {
 
   async get(req, res) {
     const query = req.query || {}
-    const result = await Category.getAllByFilter(query, { createdAt: 1 });
+    const result = await Category.getCategories(query, { createdAt: 1 });
     res.status(httpStatus.OK).json(result);
   }
 
