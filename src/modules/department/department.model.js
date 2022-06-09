@@ -12,7 +12,13 @@ const departmentSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
-    }
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    icon : String,
+    description : String,
   },
   {
     timestamps: true,

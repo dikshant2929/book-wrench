@@ -2,6 +2,9 @@ const { Joi } = require("express-validation");
 
 const getDepartmentCommonFieldsForAddEdit = () => ({
   title: Joi.string(),
+  isActive: Joi.boolean(),
+  icon: Joi.string().allow(null, ''),
+  description : Joi.string().allow(null, '')
 });
 
 const addNewDepartmentValidation = {
