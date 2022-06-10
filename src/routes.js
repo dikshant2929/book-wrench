@@ -1,17 +1,28 @@
 const express = require("express");
 const httpStatus = require("http-status");
 
+const multer  = require('multer');
+const upload = multer({ dest: 'static/uploads/' });
+
 const user = require("./modules/user/user.routes");
 const category = require("./modules/category/category.routes");
 const department = require("./modules/department/department.routes");
 const { CANT_PROCESS_REQUEST } = require("./constants/errorMsgs");
 const { isValidHeader } = require("./middlewares");
+const ImageController = require("./modules/uploadImage/ImageUpload.controller");
 
 const router = new express.Router();
 
 router.use("/api/v1/user", isValidHeader, user);
 router.use("/api/v1/category", isValidHeader, category);
 router.use("/api/v1/department", isValidHeader, department);
+
+router.use("/api/v1/department", isValidHeader, department);
+router.use("/api/v1/department", isValidHeader, department);
+
+router.post("/api/v1/uploadImage", upload.single('file'), ImageController.uploadImage);
+router.delete("/api/v1/deleteImage/:id", ImageController.deleteImage);
+router.delete("/api/v1/deleteImageByName/:name", ImageController.deleteImageByName);
 
 router.use("/health", (_, res) => {
   return res.status(200).json({ message: "I am healthy" });
