@@ -2,7 +2,11 @@ const { Joi } = require("express-validation");
 
 const getUsersCommonFieldsForAddEdit = () => ({
   title: Joi.string(),
-  departmentId: Joi.string()
+  // departmentId: Joi.string()
+  //     .hex()
+  //     .regex(/^[0-9a-fA-F]{24}$/)
+  //     .message("Not a Mongo ID Pattern"),
+  categoryId: Joi.string()
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Not a Mongo ID Pattern"),
@@ -14,12 +18,18 @@ const getUsersCommonFieldsForAddEdit = () => ({
 const addNewCateogryValidation = {
   body: Joi.object({
     ...getUsersCommonFieldsForAddEdit(),
-    departmentId: Joi.string()
+    title: Joi.string().required(),
+    // departmentId: Joi.string()
+    //   .hex()
+    //   .regex(/^[0-9a-fA-F]{24}$/)
+    //   .message("Not a Mongo ID Pattern")
+    //   .required(),
+    categoryId: Joi.string()
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Not a Mongo ID Pattern")
       .required(),
-  }).min(1),
+  }).min(3),
 };
 
 const updateExistingCategoryValidation = {
@@ -30,13 +40,12 @@ const updateExistingCategoryValidation = {
 
 const getCategoryValidation = {
   params: Joi.object({
-    categoryId: Joi.string()
+    subCategoryId: Joi.string()
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Not a Mongo ID Pattern"),
   }),
 };
-
 
 module.exports = {
   addNewCateogryValidation,

@@ -23,7 +23,7 @@ class Base {
    */
   async getByFilter(filter = {}) {
     if (!Object.keys(filter).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.FIND_FILTER_MISSING);
-    console.log(filter);
+    // console.log(filter);
     return this.Model.findOne(filter);
   }
 

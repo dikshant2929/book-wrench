@@ -1,5 +1,5 @@
 const Base = require("../../service/Base.service");
-const Category = require("./category.model");
+const SubCategory = require("./sub-category.model");
 
 const httpStatus = require("http-status");
 const mongoose = require("mongoose");
@@ -12,7 +12,7 @@ const ObjectId = mongoose.Types.ObjectId;
 class CategoryService extends Base {
   constructor() {
     super();
-    this.Model = Category;
+    this.Model = SubCategory;
   }
 
   async addSubCategory(id, body = {}) {
@@ -25,7 +25,7 @@ class CategoryService extends Base {
     return result;
   }
 
-  async getCategories(filter = {}, sortPref = { createdAt: -1 }) {
+  async getSubCategories(filter = {}, sortPref = { createdAt: -1 }) {
     // if (!Object.keys(filter).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.FIND_FILTER_MISSING);
     // console.log(filter);
     let result = await this.getAllByFilter(filter, sortPref)

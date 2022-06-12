@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const { USER, DEPARTMENT } = require("../../database/dbCollections");
+const { USER, CATEGORY, DEPARTMENT, SUB_CATEGORY } = require("../../database/dbCollections");
 const { toJSON, paginate } = require("../../utils/plugins");
 
-const departmentSchema = new mongoose.Schema(
+const categorySchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -12,6 +12,11 @@ const departmentSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
+    },
+    categoryId : {
+      type: mongoose.Schema.ObjectId,
+      ref: CATEGORY,
+      autopopulate: true
     },
     isActive: {
       type: Boolean,
@@ -24,15 +29,16 @@ const departmentSchema = new mongoose.Schema(
     description : {
       type: String,
       default: "",
-    },
+    }
   },
   {
     timestamps: true,
   }
 );
 
-departmentSchema.plugin(toJSON);
-departmentSchema.plugin(paginate);
+categorySchema.plugin(toJSON);
+categorySchema.plugin(paginate);
+categorySchema.plugin(require('mongoose-autopopulate'));
 
-const Department = new mongoose.model(DEPARTMENT, departmentSchema);
-module.exports = Department;
+const Category = new mongoose.model(SUB_CATEGORY, categorySchema);
+module.exports = Category;

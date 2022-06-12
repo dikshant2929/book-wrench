@@ -9,6 +9,10 @@ const categorySchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    icon : {
+      type: String,
+      default: "",
+    },
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
@@ -16,10 +20,20 @@ const categorySchema = new mongoose.Schema(
     departmentId : {
       type: mongoose.Schema.ObjectId,
       ref: DEPARTMENT,
+      autopopulate: true
     },
-    subCategory : {
-      type: [String],
-    }
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    icon : {
+      type: String,
+      default: "",
+    },
+    description : {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,
@@ -28,6 +42,12 @@ const categorySchema = new mongoose.Schema(
 
 categorySchema.plugin(toJSON);
 categorySchema.plugin(paginate);
+categorySchema.plugin(require('mongoose-autopopulate'));
+// categorySchema.virtual('department', {
+//   ref: DEPARTMENT,
+//   localField: 'departmentId', 
+//   foreignField: '_id' 
+// });
 
 const Category = new mongoose.model(CATEGORY, categorySchema);
 module.exports = Category;
