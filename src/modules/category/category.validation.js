@@ -7,8 +7,8 @@ const getUsersCommonFieldsForAddEdit = () => ({
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Not a Mongo ID Pattern"),
   isActive: Joi.boolean().default(true),
-  icon: Joi.string(),
-  description: Joi.string(),
+  icon: Joi.string().allow(null, ''),
+  description: Joi.string().allow(null, ''),
 });
 
 const addNewCateogryValidation = {
