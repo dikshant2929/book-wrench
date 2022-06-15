@@ -8,6 +8,8 @@ const user = require("./modules/user/user.routes");
 const category = require("./modules/category/category.routes");
 const subCategory = require("./modules/sub-category/sub-category.routes");
 const department = require("./modules/department/department.routes");
+const vendor = require("./modules/vendor/vendor.routes");
+
 const { CANT_PROCESS_REQUEST } = require("./constants/errorMsgs");
 const { isValidHeader } = require("./middlewares");
 const ImageController = require("./modules/uploadImage/ImageUpload.controller");
@@ -19,6 +21,7 @@ router.use("/api/v1/user", isValidHeader, user);
 router.use("/api/v1/department", isValidHeader, department);
 router.use("/api/v1/category", isValidHeader, category);
 router.use("/api/v1/sub-category", isValidHeader, subCategory);
+router.use("/api/v1/vendor", isValidHeader, vendor);
 
 router.post("/api/v1/uploadImage", upload.single('file'), ImageController.uploadImage);
 router.delete("/api/v1/deleteImage/:id", ImageController.deleteImage);

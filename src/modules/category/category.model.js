@@ -44,11 +44,6 @@ const categorySchema = new mongoose.Schema(
 categorySchema.plugin(toJSON);
 categorySchema.plugin(paginate);
 categorySchema.plugin(require('mongoose-autopopulate'));
-// categorySchema.virtual('department', {
-//   ref: DEPARTMENT,
-//   localField: 'departmentId', 
-//   foreignField: '_id' 
-// });
 
 categorySchema.post('findOneAndDelete', function(document, next) {
   SubCategoryModel.deleteMany({ categoryId : document._id}, function(err, response){
