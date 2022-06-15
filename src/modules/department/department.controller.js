@@ -32,7 +32,7 @@ class DepartmentController {
 
   async delete(req, res) {
     let result = null;
-    if (req.params && req.params.departmentId) result = await Department.deleteById(req.params.departmentId);
+    if (req.params && req.params.departmentId) result = await Department.removeDepartmentAndDependentData(req.params.departmentId);
     res.status(result ? httpStatus.OK : httpStatus.BAD_REQUEST).json(result);
   }
 }

@@ -6,6 +6,11 @@ class DepartmentService extends Base {
     super();
     this.Model = Department;
   }
+
+  async removeDepartmentAndDependentData(departmentId){
+    const result = await this.deleteById(departmentId);
+    return result;
+  }
 }
 
 module.exports = new DepartmentService();
