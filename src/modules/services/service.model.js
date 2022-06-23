@@ -70,6 +70,7 @@ const serviceSchema = new mongoose.Schema(
 
 serviceSchema.plugin(toJSON);
 serviceSchema.plugin(paginate);
+serviceSchema.plugin(require('mongoose-autopopulate'));
 
 const serviceModel = new mongoose.model(SERVICE, serviceSchema);
 module.exports = serviceModel;
