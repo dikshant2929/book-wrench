@@ -44,8 +44,8 @@ const serviceSchema = new mongoose.Schema(
       costOfService : String,
       costOfMaterial : String,
       commission: String,
-      labourMinutes : Number,
-      laboutCost: String, 
+      labourMinuites : Number,
+      labourCost: String, 
       memberPrice: String, 
       addOnPrice: String, 
       isTaxable: {
