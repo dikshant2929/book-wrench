@@ -29,7 +29,7 @@ const toJSON = (schema) => {
       //   }
       // });
 
-      ret.id = ret._id.toString();
+      if(ret?._id) ret.id = ret?._id?.toString();
       ret.createdAt = new Date(ret.createdAt).toLocaleString()
       ret.updatedAt = new Date(ret.updatedAt).toLocaleString()
       delete ret._id;

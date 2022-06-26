@@ -4,7 +4,8 @@ const COLLECTIONS = {
   SUB_CATEGORY : "SubCategory",
   DEPARTMENT : "Department",
   VENDOR : "Vendor",
-  SERVICE : "Service"
+  SERVICE : "Service",
+  PRODUCT : "Product"
 };
 
 module.exports = COLLECTIONS;
