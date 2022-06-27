@@ -22,7 +22,7 @@ exports.uploadImage = async (req, res) => {
         const imageFile = fs.readFileSync(image.path);
         const uploadedImage = await imagekit.upload({
             file : imageFile, //required
-            fileName : 'BOOK_WRENCH_IMG_'+new Date().getTime() //required
+            fileName : 'BOOK_WRENCH_FILE_'+new Date().getTime() //required
         });
         fs.unlink(image.path, () => {});
         if(!uploadedImage){
@@ -34,7 +34,7 @@ exports.uploadImage = async (req, res) => {
         }
         res.status(200).json({
             status: true,
-            message: "Image Added Successfully !!!",
+            message: "File Added Successfully !!!",
             data : uploadedImage
         });
         return;
