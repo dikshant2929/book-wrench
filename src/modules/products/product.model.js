@@ -40,11 +40,18 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    price: {
+    retailPrice: {
       type: Number,
       default: 0,
       get: getPrice, 
       set: setPrice
+    },
+    vendorCost: {
+      type: Number,
+      default: 0,
+    },
+    unitOfMessure : {
+      type: String,
     },
     isActive: {
       type: Boolean,
