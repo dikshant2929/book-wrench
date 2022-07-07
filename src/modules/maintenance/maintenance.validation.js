@@ -5,10 +5,12 @@ const getMaintenanceCommonFieldsForAddEdit = () => ({
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Invalid format provided for categoryId"),
-  subCategoryIds: Joi.string()
+  subCategoryIds: Joi.string().items(
+    Joi.string()
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
-      .message("Invalid format provided for categoryId"),
+      .message("Invalid format provided for subCategoryIds")
+      ),
   serviceIds : Joi.array().items(
     Joi.string()
       .hex()
