@@ -20,38 +20,32 @@ const maintenanceSchema = new mongoose.Schema(
       ref: SERVICE,
       autopopulate: true
     }],
+    productIds : [{
+      type: mongoose.Schema.ObjectId,
+      ref: PRODUCT,
+      autopopulate: true
+    }],
+    cost : {
+      duration : String,
+      packageCost: String,
+      costPerVisit : String,
+      renewalCost: String, 
+    },
+    expense : {
+      expense : String,
+      additionalCost: String,
+      commission : String,
+      ticketTimeMinutes: String, 
+      laborCost: String, 
+    },
+    frequency : {
+      interval : String,
+      intervalValue: String,
+    },
     title: {
       type: String,
       required: true,
       unique: true,
-    },
-    code: {
-      type: String,
-    },
-    brand: {
-      type: String,
-    },
-    vendorId : {
-      type: mongoose.Schema.ObjectId,
-      ref: VENDOR,
-      autopopulate: true
-    },
-    quantity: {
-      type: Number,
-      default: 0,
-    },
-    retailPrice: {
-      type: Number,
-      default: 0,
-      get: getPrice, 
-      set: setPrice
-    },
-    vendorCost: {
-      type: Number,
-      default: 0,
-    },
-    unitOfMessure : {
-      type: String,
     },
     isActive: {
       type: Boolean,
@@ -61,11 +55,11 @@ const maintenanceSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    description : {
+    priority : {
       type: String,
       default: "",
     },
-    warrantyDescription : {
+    packageDescription : {
       type: String,
       default: "",
     },
