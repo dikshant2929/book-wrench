@@ -15,12 +15,12 @@ const maintenanceSchema = new mongoose.Schema(
       ref: SUB_CATEGORY,
       autopopulate: true
     }],
-    serviceIds : [{
+    servicesIds : [{
       type: mongoose.Schema.ObjectId,
       ref: SERVICE,
       autopopulate: true
     }],
-    productIds : [{
+    productsIds : [{
       type: mongoose.Schema.ObjectId,
       ref: PRODUCT,
       autopopulate: true

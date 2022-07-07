@@ -11,17 +11,17 @@ const getMaintenanceCommonFieldsForAddEdit = () => ({
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Invalid format provided for subCategoryIds")
       ),
-  serviceIds : Joi.array().items(
+  servicesIds : Joi.array().items(
     Joi.string()
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
-      .message("Invalid format provided for serviceIds")
+      .message("Invalid format provided for servicesIds")
   ),
-  productIds : Joi.array().items(
+  productsIds : Joi.array().items(
     Joi.string()
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
-      .message("Invalid format provided for productIds")
+      .message("Invalid format provided for productsIds")
   ),
   title: Joi.string(),
   isActive: Joi.boolean(),
