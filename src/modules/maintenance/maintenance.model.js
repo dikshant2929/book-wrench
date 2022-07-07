@@ -10,11 +10,11 @@ const maintenanceSchema = new mongoose.Schema(
       autopopulate: true,
       required: true
     },
-    subCategoryId : {
+    subCategoryIds : [{
       type: mongoose.Schema.ObjectId,
       ref: SUB_CATEGORY,
       autopopulate: true
-    },
+    }],
     serviceIds : [{
       type: mongoose.Schema.ObjectId,
       ref: SERVICE,
