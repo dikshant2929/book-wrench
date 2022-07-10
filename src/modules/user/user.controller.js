@@ -21,7 +21,8 @@ class UserController {
     const response = result ? { message : "Thank You for logging-in at Book Wrench System.", data : result} : { message : "Please check your login credetails."};
     if(result){
       const token = JWT.createToken({ userId: result.id, role : result.role});
-      res.cookie("Authorization", `Bearer ${token}`, { maxAge: 1000 * 60 * 60 * 24 * 90, httpOnly: true, sameSite: "none", secure: true }),
+      //, secure: true
+      res.cookie("Authorization", `Bearer ${token}`, { maxAge: 1000 * 60 * 60 * 24 * 90, httpOnly: true, sameSite: "none" }),
       result && User.updateUserById(result.id, { lastLogin : new Date()});
     }
     res.status(result ? httpStatus.OK : httpStatus.NOT_ACCEPTABLE).json(response);
