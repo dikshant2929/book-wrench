@@ -18,6 +18,7 @@ class DepartmentController {
 
   async post(req, res) {
     const request = req.body || {};
+    request.createdBy = req?.user?.userId;
     const department = await Department.insert(request);
     res.status(department ? httpStatus.CREATED : httpStatus.BAD_REQUEST).json(department);
   }

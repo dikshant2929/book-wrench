@@ -66,6 +66,7 @@ const maintenanceSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
+      autopopulate: true,
     },
     attachments : {
       documents : [ String ],

@@ -35,6 +35,7 @@ const serviceSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
+      autopopulate: true,
     },
     isActive: {
       type: Boolean,

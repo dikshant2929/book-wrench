@@ -12,6 +12,7 @@ const categorySchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
+      autopopulate: true
     },
     categoryId : {
       type: mongoose.Schema.ObjectId,

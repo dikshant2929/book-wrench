@@ -18,6 +18,7 @@ class ServiceController {
 
   async post(req, res) {
     const request = req.body || {};
+    request.createdBy = req?.user?.userId;
     const service = await Service.insert(request);
     res.status(service ? httpStatus.CREATED : httpStatus.BAD_REQUEST).json(service);
   }

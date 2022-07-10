@@ -18,6 +18,7 @@ class CategoryController {
 
   async post(req, res) {
     const request = req.body || {};
+    request.createdBy = req?.user?.userId;
     const category = await Category.insert(request);
     res.status(category ? httpStatus.CREATED : httpStatus.BAD_REQUEST).json(category);
   }

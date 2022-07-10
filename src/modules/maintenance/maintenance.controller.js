@@ -18,6 +18,7 @@ class MaintenanceController {
 
   async post(req, res) {
     const request = req.body || {};
+    request.createdBy = req?.user?.userId;
     const maintenance = await Maintenance.insert(request);
     res.status(maintenance ? httpStatus.CREATED : httpStatus.BAD_REQUEST).json(maintenance);
   }

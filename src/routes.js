@@ -20,7 +20,7 @@ const ImageController = require("./modules/uploadImage/ImageUpload.controller");
 
 const router = new express.Router();
 
-router.use("/api/v1/user", isValidHeader, user);
+router.use("/api/v1/user", user);
 
 router.use("/api/v1/department", isValidHeader, department);
 router.use("/api/v1/category", isValidHeader, category);

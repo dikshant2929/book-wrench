@@ -15,6 +15,7 @@ const departmentSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
+      autopopulate: true
     },
     isActive: {
       type: Boolean,
@@ -51,6 +52,8 @@ departmentSchema.post('findOneAndDelete', function(document, next) {
   })
   next();
 });
+
+departmentSchema.plugin(require('mongoose-autopopulate'));
 
 const Department = new mongoose.model(DEPARTMENT, departmentSchema);
 module.exports = Department;

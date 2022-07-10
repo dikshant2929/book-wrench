@@ -18,6 +18,7 @@ class ProductController {
 
   async post(req, res) {
     const request = req.body || {};
+    request.createdBy = req?.user?.userId;
     const product = await Product.insert(request);
     res.status(product ? httpStatus.CREATED : httpStatus.BAD_REQUEST).json(product);
   }

@@ -17,6 +17,7 @@ const categorySchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.ObjectId,
       ref: USER,
+      autopopulate: true
     },
     departmentId : {
       type: mongoose.Schema.ObjectId,

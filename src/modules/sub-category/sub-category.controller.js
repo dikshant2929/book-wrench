@@ -18,6 +18,7 @@ class SubCategoryController {
 
   async post(req, res) {
     const request = req.body || {};
+    request.createdBy = req?.user?.userId;
     const result = await SubCategory.insert(request);
     res.status(result ? httpStatus.CREATED : httpStatus.BAD_REQUEST).json(result);
   }
