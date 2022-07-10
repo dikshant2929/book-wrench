@@ -5,8 +5,8 @@ const routes = require("../routes");
 const databaseHelper = require("../database");
 const { errorConverter, errorHandler } = require("../middlewares/error");
 const logger = require("../middlewares/logger");
-const cors = require('cors')
-
+const cors = require('cors');
+const cookieParser = require("cookie-parser");
 class App {
   constructor() {
     this.express = express();
@@ -26,6 +26,7 @@ class App {
   middlewares() {
     this.express.use(cors());
     this.express.use(express.json());
+    this.express.use(cookieParser());
   }
 
   logger() {
