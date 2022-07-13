@@ -12,7 +12,7 @@ const vendor = require("./modules/vendor/vendor.routes");
 const service = require("./modules/services/service.routes");
 const product = require("./modules/products/product.routes");
 const maintenance = require("./modules/maintenance/maintenance.routes");
-
+const customer = require("./modules/customer/customer.routes");
 
 const { CANT_PROCESS_REQUEST } = require("./constants/errorMsgs");
 const { isValidHeader } = require("./middlewares");
@@ -29,7 +29,7 @@ router.use("/api/v1/vendor", isValidHeader, vendor);
 router.use("/api/v1/service", isValidHeader, service);
 router.use("/api/v1/product", isValidHeader, product);
 router.use("/api/v1/maintenance", isValidHeader, maintenance);
-
+router.use("/api/v1/customer", isValidHeader, customer);
 
 
 

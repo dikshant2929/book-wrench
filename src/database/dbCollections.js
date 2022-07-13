@@ -6,7 +6,8 @@ const COLLECTIONS = {
   VENDOR : "Vendor",
   SERVICE : "Service",
   PRODUCT : "Product",
-  MAINTENANCE : "Maintenance"
+  MAINTENANCE : "Maintenance",
+  CUSTOMER : "Customer"
 };
 
 module.exports = COLLECTIONS;
