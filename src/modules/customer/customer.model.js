@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { USER, CUSTOMER } = require("../../database/dbCollections");
 const { toJSON, paginate } = require("../../utils/plugins");
+const validator = require("validator");
 
 const customerSchema = new mongoose.Schema(
   {
@@ -80,7 +81,6 @@ customerSchema.plugin(require('mongoose-autopopulate'));
 customerSchema.pre("save", async function (next) {
   const lastField = await Customer.findOne({}).sort({createdAt: -1})
   const customer = this;
-  console.log(lastField);
   customer.customerId = (lastField?.customerId || 0) + 1;
   next();
 });
