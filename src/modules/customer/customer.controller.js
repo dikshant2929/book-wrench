@@ -8,6 +8,8 @@ class CustomerController {
     this.update = catchAsync(this.put.bind(this));
     this.create = catchAsync(this.post.bind(this));
     this.remove = catchAsync(this.delete);
+    this.addContactPerson = catchAsync(this.#addContactPerson.bind(this));
+    this.updateContactPerson = catchAsync(this.#updateContactPerson.bind(this));
   }
 
   async get(req, res) {
@@ -35,6 +37,22 @@ class CustomerController {
     let result = null;
     if (req.params && req.params.customerId) result = await Customer.deleteById(req.params.customerId);
     res.status(result ? httpStatus.OK : httpStatus.BAD_REQUEST).json(result);
+  }
+
+  async #addContactPerson(req , res){
+    let customer = null;
+    if (req.params && req.params.customerId && req.body) {
+      customer = await Customer.addContactPerson(req.params.customerId, req.body);
+    }
+    res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
+  }
+
+  async #updateContactPerson(req , res){
+    let customer = null;
+    if (req.params && req.params.customerId && req.body && req.params.contactPersonId) {
+      customer = await Customer.updateContactPerson(req.params.customerId, req.params.contactPersonId, req.body);
+    }
+    res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
   }
 }
 

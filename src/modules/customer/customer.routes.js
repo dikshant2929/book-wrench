@@ -7,6 +7,11 @@ const validate = require("../../middlewares/validate");
 const schema = require("./customer.validation");
 
 router
+  .route("/:customerId/contact-person/:contactPersonId?")
+  .put(validate(schema.getCustomerValidation), validate(schema.updateContactPersonValidation), CustomerController.updateContactPerson)
+  .post(validate(schema.getCustomerValidation), validate(schema.addContactPersonValidation), CustomerController.addContactPerson);
+
+router
   .route("/:customerId?")
   .get(validate(schema.getCustomerValidation, {}, {}), CustomerController.retrieve)
   .post(validate(schema.addNewCustomerValidation, {}, {}), CustomerController.create)

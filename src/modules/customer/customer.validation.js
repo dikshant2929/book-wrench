@@ -34,6 +34,29 @@ const addNewCustomerValidation = {
   }).min(3),
 };
 
+const addContactPersonValidation = {
+  body: Joi.object({
+    contactPerson: Joi.array().items(Joi.object({
+      name: Joi.string().allow(null, ''),
+      mobileNumber: Joi.string().allow(null, ''),
+      email: Joi.string().email().allow(null, ''),
+      designation: Joi.string().allow(null, ''),
+    }))
+  }).min(1),
+};
+
+
+const updateContactPersonValidation = {
+  body: Joi.object({
+    contactPerson: Joi.object({
+      name: Joi.string().allow(null, ''),
+      mobileNumber: Joi.string().allow(null, ''),
+      email: Joi.string().email().allow(null, ''),
+      designation: Joi.string().allow(null, ''),
+    })
+  })
+};
+
 const updateExistingCustomerValidation = {
   body: Joi.object({
     ...getCustomerCommonFieldsForAddEdit(),
@@ -46,11 +69,17 @@ const getCustomerValidation = {
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Not a Mongo ID Pattern"),
+    contactPersonId: Joi.string()
+      .hex()
+      .regex(/^[0-9a-fA-F]{24}$/)
+      .message("Not a Mongo ID Pattern"),
   }),
 };
 
 
 module.exports = {
+  addContactPersonValidation,
+  updateContactPersonValidation,
   addNewCustomerValidation,
   updateExistingCustomerValidation,
   getCustomerValidation
