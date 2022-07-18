@@ -27,14 +27,21 @@ class CustomerService extends Base {
     if (!Object.keys(body).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.UPDATE_BODY_EMPTY);
     const exisiting = await this.getById(id);
     if (!exisiting) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.NON_EXISTING);
-    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id), "contactPerson._id" : ObjectId(contactPersonId) }, { $set: this.updateObject(body) }, { returnDocument: "after" });
+    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id), "contactPerson._id" : ObjectId(contactPersonId) }, { $set: this.updateObject('contactPerson',body) }, { returnDocument: "after" });
     return result;
   }
 
-  updateObject(object){
+  async removeContactPerson(id, contactPersonId ) {
+    const exisiting = await this.getById(id);
+    if (!exisiting) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.NON_EXISTING);
+    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id), "contactPerson._id" : ObjectId(contactPersonId) }, { $pull: { contactPerson : { _id : ObjectId(contactPersonId)} }}, { returnDocument: "after" });
+    return result;
+  }
+
+  updateObject(key, object){
     const request = {};
-    Object.keys(object['contactPerson']).forEach(item => {
-      request['contactPerson.$.'+item] = object['contactPerson'][item];
+    Object.keys(object[key]).forEach(item => {
+      request[key+'.$.'+item] = object[key][item];
     });
     console.log(request);
     return request

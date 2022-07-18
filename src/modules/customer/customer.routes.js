@@ -9,7 +9,9 @@ const schema = require("./customer.validation");
 router
   .route("/:customerId/contact-person/:contactPersonId?")
   .put(validate(schema.getCustomerValidation), validate(schema.updateContactPersonValidation), CustomerController.updateContactPerson)
-  .post(validate(schema.getCustomerValidation), validate(schema.addContactPersonValidation), CustomerController.addContactPerson);
+  .post(validate(schema.getCustomerValidation), validate(schema.addContactPersonValidation), CustomerController.addContactPerson)
+  .delete(validate(schema.getCustomerValidation, {}, {}), CustomerController.deleteContactPerson);
+
 
 router
   .route("/:customerId?")

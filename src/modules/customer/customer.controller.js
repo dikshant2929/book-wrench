@@ -10,6 +10,8 @@ class CustomerController {
     this.remove = catchAsync(this.delete);
     this.addContactPerson = catchAsync(this.#addContactPerson.bind(this));
     this.updateContactPerson = catchAsync(this.#updateContactPerson.bind(this));
+    this.deleteContactPerson = catchAsync(this.#deleteContactPerson.bind(this));
+    
   }
 
   async get(req, res) {
@@ -54,6 +56,15 @@ class CustomerController {
     }
     res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
   }
+
+  async #deleteContactPerson(req , res){
+    let customer = null;
+    if (req.params && req.params.customerId && req.params.contactPersonId) {
+      customer = await Customer.removeContactPerson(req.params.customerId, req.params.contactPersonId);
+    }
+    res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
+  }
+
 }
 
 module.exports = new CustomerController();
