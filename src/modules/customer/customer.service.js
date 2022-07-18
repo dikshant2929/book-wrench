@@ -19,7 +19,7 @@ class CustomerService extends Base {
     if (!Object.keys(body).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.UPDATE_BODY_EMPTY);
     const exisiting = await this.getById(id);
     if (!exisiting) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.NON_EXISTING);
-    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id) }, { $addToSet: body }, { returnDocument: "after" });
+    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id) }, { $push: { contactPerson : body.contactPerson[0]} }, { returnDocument: "after" });
     return result;
   }
 
