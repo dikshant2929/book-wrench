@@ -38,6 +38,29 @@ class CustomerService extends Base {
     return result;
   }
 
+  async addContactAddress(id, body = {}) {
+    if (!Object.keys(body).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.UPDATE_BODY_EMPTY);
+    const exisiting = await this.getById(id);
+    if (!exisiting) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.NON_EXISTING);
+    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id) }, { $push: { contactAddress : body.contactAddress[0]} }, { returnDocument: "after" });
+    return result;
+  }
+
+  async updateContactAddress(id, contactAddressId, body = {}) {
+    if (!Object.keys(body).length) throw new CustomError(httpStatus.BAD_REQUEST, errorMsgs.UPDATE_BODY_EMPTY);
+    const exisiting = await this.getById(id);
+    if (!exisiting) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.NON_EXISTING);
+    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id), "contactAddress._id" : ObjectId(contactAddressId) }, { $set: this.updateObject('contactAddress',body) }, { returnDocument: "after" });
+    return result;
+  }
+
+  async removeContactAddress(id, contactAddressId ) {
+    const exisiting = await this.getById(id);
+    if (!exisiting) throw new CustomError(httpStatus.NOT_FOUND, errorMsgs.NON_EXISTING);
+    const result = await this.Model.findOneAndUpdate({ _id : ObjectId(id), "contactAddress._id" : ObjectId(contactAddressId) }, { $pull: { contactAddress : { _id : ObjectId(contactAddressId)} }}, { returnDocument: "after" });
+    return result;
+  }
+
   updateObject(key, object){
     const request = {};
     Object.keys(object[key]).forEach(item => {

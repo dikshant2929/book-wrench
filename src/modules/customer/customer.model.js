@@ -60,7 +60,7 @@ const customerSchema = new mongoose.Schema(
       },
       designation: String
     }],
-    addresses : [{
+    contactAddress : [{
       location: String, 
       gateNumber: String, 
       contactPerson : {

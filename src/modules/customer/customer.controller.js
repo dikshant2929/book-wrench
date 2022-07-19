@@ -11,6 +11,9 @@ class CustomerController {
     this.addContactPerson = catchAsync(this.#addContactPerson.bind(this));
     this.updateContactPerson = catchAsync(this.#updateContactPerson.bind(this));
     this.deleteContactPerson = catchAsync(this.#deleteContactPerson.bind(this));
+    this.addContactAddress = catchAsync(this.#addContactAddress.bind(this));
+    this.updateContactAddress = catchAsync(this.#updateContactAddress.bind(this));
+    this.deleteContactAddress = catchAsync(this.#deleteContactAddress.bind(this));
     
   }
 
@@ -61,6 +64,30 @@ class CustomerController {
     let customer = null;
     if (req.params && req.params.customerId && req.params.contactPersonId) {
       customer = await Customer.removeContactPerson(req.params.customerId, req.params.contactPersonId);
+    }
+    res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
+  }
+
+  async #addContactAddress(req , res){
+    let customer = null;
+    if (req.params && req.params.customerId && req.body) {
+      customer = await Customer.addContactAddress(req.params.customerId, req.body);
+    }
+    res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
+  }
+
+  async #updateContactAddress(req , res){
+    let customer = null;
+    if (req.params && req.params.customerId && req.body && req.params.contactAddressId) {
+      customer = await Customer.updateContactAddress(req.params.customerId, req.params.contactAddressId, req.body);
+    }
+    res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
+  }
+
+  async #deleteContactAddress(req , res){
+    let customer = null;
+    if (req.params && req.params.customerId && req.params.contactAddressId) {
+      customer = await Customer.removeContactAddress(req.params.customerId, req.params.contactAddressId);
     }
     res.status(customer ? httpStatus.OK : httpStatus.BAD_REQUEST).json(customer);
   }

@@ -7,11 +7,16 @@ const validate = require("../../middlewares/validate");
 const schema = require("./customer.validation");
 
 router
-  .route("/:customerId/contact-person/:contactPersonId?")
+  .route("/:customerId/contact-person/:contactAddresscontactPersonId?")
   .put(validate(schema.getCustomerValidation), validate(schema.updateContactPersonValidation), CustomerController.updateContactPerson)
   .post(validate(schema.getCustomerValidation), validate(schema.addContactPersonValidation), CustomerController.addContactPerson)
   .delete(validate(schema.getCustomerValidation, {}, {}), CustomerController.deleteContactPerson);
 
+router
+  .route("/:customerId/contact-address/:contactAddressId?")
+  .put(validate(schema.getCustomerValidation), validate(schema.updateContactAddressValidation), CustomerController.updateContactAddress)
+  .post(validate(schema.getCustomerValidation), validate(schema.addContactAddressValidation), CustomerController.addContactAddress)
+  .delete(validate(schema.getCustomerValidation, {}, {}), CustomerController.deleteContactAddress);
 
 router
   .route("/:customerId?")

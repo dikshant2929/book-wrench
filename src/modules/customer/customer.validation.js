@@ -14,7 +14,7 @@ const getCustomerCommonFieldsForAddEdit = () => ({
     email: Joi.string().email().allow(null, ''),
     designation: Joi.string().allow(null, ''),
   })),
-  addresses: Joi.array().items(Joi.object({
+  contactAddress: Joi.array().items(Joi.object({
     location: Joi.string().allow(null, ''),
     gateNumber: Joi.string().allow(null, ''),
     contactPerson: Joi.string()
@@ -57,6 +57,32 @@ const updateContactPersonValidation = {
   })
 };
 
+const addContactAddressValidation = {
+  body: Joi.object({
+    contactAddress: Joi.array().items(Joi.object({
+      location: Joi.string().allow(null, ''),
+      gateNumber: Joi.string().allow(null, ''),
+      contactPerson: Joi.string()
+        .hex()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .message("Not a Mongo ID Pattern"),
+    }))
+  }).min(1),
+};
+
+const updateContactAddressValidation = {
+  body: Joi.object({
+    contactAddress: Joi.object({
+      location: Joi.string().allow(null, ''),
+      gateNumber: Joi.string().allow(null, ''),
+      contactPerson: Joi.string()
+        .hex()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .message("Not a Mongo ID Pattern"),
+    })
+  })
+};
+
 const updateExistingCustomerValidation = {
   body: Joi.object({
     ...getCustomerCommonFieldsForAddEdit(),
@@ -73,11 +99,18 @@ const getCustomerValidation = {
       .hex()
       .regex(/^[0-9a-fA-F]{24}$/)
       .message("Not a Mongo ID Pattern"),
+    contactAddressId: Joi.string()
+      .hex()
+      .regex(/^[0-9a-fA-F]{24}$/)
+      .message("Not a Mongo ID Pattern"),
   }),
 };
 
 
+
 module.exports = {
+  addContactAddressValidation,
+  updateContactAddressValidation,
   addContactPersonValidation,
   updateContactPersonValidation,
   addNewCustomerValidation,
