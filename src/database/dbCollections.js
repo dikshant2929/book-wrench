@@ -7,7 +7,8 @@ const COLLECTIONS = {
   SERVICE : "Service",
   PRODUCT : "Product",
   MAINTENANCE : "Maintenance",
-  CUSTOMER : "Customer"
+  CUSTOMER : "Customer",
+  CUSTOMER_MAINTENANCE : "Customer-Maintenance"
 };
 
 module.exports = COLLECTIONS;
