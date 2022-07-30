@@ -37,6 +37,8 @@ const userSchema = new mongoose.Schema(
         }
       },
     },
+    phoneNumber: String,
+    profileImage: String,
     lastLogin: {
       type: Date,
     },

@@ -7,6 +7,9 @@ const getUsersCommonFieldsForAddEdit = () => ({
     .min(3),
   email: Joi.string().email(),
   password: Joi.string(),
+  role: Joi.string().default('user'),
+  phoneNumber: Joi.string().allow(null, ''),
+  profileImage: Joi.string().allow(null, ''),
   lastLogin: Joi.date().timestamp(),
   isActive: Joi.boolean().default(true),
   isVerified: Joi.boolean().default(false),
@@ -15,7 +18,8 @@ const getUsersCommonFieldsForAddEdit = () => ({
 const newUserValidation = {
   body: Joi.object({
     ...getUsersCommonFieldsForAddEdit(),
-    username: Joi.string(),
+    username: Joi.string().required(),
+    password: Joi.string().required(),
   }),
 };
 
